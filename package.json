@@ -1,0 +1,26 @@
+{
+  "name": "task2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pranatoli/nodejs.git#task2"
+  },
+  "author": "Anatoli Prishchepov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pranatoli/nodejs/issues"
+  },
+  "homepage": "https://github.com/pranatoli/nodejs/tree/task2#readme",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "fs": "^0.0.1-security",
+    "nodemon": "^3.0.1"
+  }
+}
