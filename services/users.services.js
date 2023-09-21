@@ -37,7 +37,6 @@ class UsersServices {
     }
 
     createUser(req) {
-        console.log(req.body);
         return new Promise((res, rej) => {
             fs.readFile('data.json', 'utf8', (error, data) => {
                 if (error) throw error;
@@ -53,6 +52,23 @@ class UsersServices {
                     })
                 });
 
+            })
+        })
+    }
+
+    deleteUser(req) {
+        return new Promise((res, rej) => {
+            fs.readFile('data.json', 'utf8', (error, data) => {
+                if (error) throw error;
+                const arrUsers = JSON.parse(data);
+                const id = arrUsers.findIndex((i) => i.id == req.params.id)
+                if (id != -1) {
+                    arrUsers.splice(id, 1);
+                    fs.writeFile('data.json', JSON.stringify(arrUsers), (error) => {
+                        if (error) throw error;
+                        res(true)
+                    });
+                } else res(false);
             })
         })
     }

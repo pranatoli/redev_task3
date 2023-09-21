@@ -18,6 +18,11 @@ class UsersController {
         const user = await UserServices.createUser(req);
         return user;
     }
+
+    async deleteUser(req) {
+        const response = await UserServices.deleteUser(req);
+        return response;
+    }
 }
 
 module.exports = new UsersController();

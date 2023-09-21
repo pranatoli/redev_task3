@@ -10,5 +10,13 @@ router.post('/', async (req, res) => {
         res.send('error: ' + error.message);
     }
 })
+router.delete('/:id', async (req, res) => {
+    try {
+        const response = await UsersController.deleteUser(req);
+        res.send(response);
+    } catch (error) {
+        res.send('error: ' + error.message);
+    }
+})
 
 module.exports = router;
