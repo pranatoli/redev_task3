@@ -9,6 +9,11 @@ class UsersController {
         const users = await UserServices.getUsersByGender(req);
         return users;
     }
+
+    async getFiltredUsersByAge(req) {
+        const users = UserServices.getFiltredUsersByAge(req);
+        return users;
+    }
 }
 
 module.exports = new UsersController();

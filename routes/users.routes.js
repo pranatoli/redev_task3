@@ -11,6 +11,17 @@ router.get('/', async (req, res) => {
     }
 })
 
+
+
+router.get('/filtredUsers', async (req, res) => {
+    try {
+        const users = await UsersController.getFiltredUsersByAge(req);
+        res.send(users)
+    } catch (error) {
+        res.send('error: ' + error.message);
+    }
+})
+
 router.get('/:gender', async (req, res) => {
     try {
         const users = await UsersController.getUsersByGender(req);
