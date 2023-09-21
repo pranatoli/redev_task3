@@ -18,5 +18,14 @@ router.delete('/:id', async (req, res) => {
         res.send('error: ' + error.message);
     }
 })
+router.put('/:id', async (req, res) => {
+    try {
+        const response = await UsersController.updateUser(req);
+        res.status(response.status);
+        res.send(response.send);
+    } catch (error) {
+        res.send('error: ' + error.message);
+    }
+})
 
 module.exports = router;

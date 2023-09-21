@@ -23,6 +23,11 @@ class UsersController {
         const response = await UserServices.deleteUser(req);
         return response;
     }
+
+    async updateUser(req) {
+        const response = await UserServices.updateUser(req);
+        return response;
+    }
 }
 
 module.exports = new UsersController();
