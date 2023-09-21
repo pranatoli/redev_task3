@@ -11,8 +11,12 @@ class UsersController {
     }
 
     async getFiltredUsersByAge(req) {
-        const users = UserServices.getFiltredUsersByAge(req);
+        const users = await UserServices.getFiltredUsersByAge(req);
         return users;
+    }
+    async createUser(req) {
+        const user = await UserServices.createUser(req);
+        return user;
     }
 }
 
