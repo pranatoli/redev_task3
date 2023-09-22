@@ -89,6 +89,29 @@ class UsersServices {
         })
     }
 
+    updateNameUser(req) {
+        return new Promise((res, rej) => {
+            fs.readFile('data.json', 'utf8', (error, data) => {
+                if (error) throw error;
+                const arrUsers = JSON.parse(data);
+                const id = arrUsers.findIndex((i) => i.id == req.params.id);
+                console.log(id);
+                if (id == -1) return res({ status: 404, send: "user not found" });
+                const updateUsers = arrUsers.map((i) => i.id == req.params.id ? { ...i, name: req.body.name } : i);
+                arrUsers.splice(0, arrUsers.length, ...updateUsers)
+                fs.writeFile('data.json', JSON.stringify(arrUsers), (error) => {
+                    if (error) throw error;
+                    fs.readFile('data.json', 'utf8', (error, data) => {
+                        if (error) throw error;
+                        const users = JSON.parse(data)
+                        const result = users.filter(i => i.id == req.params.id);
+                        res({ status: 200, send: result });
+                    })
+                })
+            })
+        })
+    }
+
     deleteUser(req) {
         return new Promise((res, rej) => {
             fs.readFile('data.json', 'utf8', (error, data) => {

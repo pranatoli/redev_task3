@@ -28,6 +28,10 @@ class UsersController {
         const response = await UserServices.updateUser(req);
         return response;
     }
+    async updateNameUser(req) {
+        const response = await UserServices.updateNameUser(req);
+        return response;
+    }
 }
 
 module.exports = new UsersController();

@@ -28,4 +28,14 @@ router.put('/:id', async (req, res) => {
     }
 })
 
+router.patch('/:id', async (req, res) => {
+    try {
+        const response = await UsersController.updateNameUser(req);
+        res.status(response.status)
+        res.send(response.send)
+    } catch (error) {
+        res.send('error: ' + error.message);
+    }
+})
+
 module.exports = router;
