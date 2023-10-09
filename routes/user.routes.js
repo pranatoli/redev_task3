@@ -19,11 +19,54 @@ const validationBodyGender = [
 const validationBodyAge = [
     body('age').notEmpty().isInt(),
 ];
-
 const validationParamId = [
     param('id').notEmpty().isInt(),
 ]
 
+// /**
+//  * @swagger
+//  *  /api/user:
+//  *      post:
+//  *        tags: 
+//  *            - User
+//  *        summary:
+//  *           Create user
+//  *        description:
+//  *            Add new user 
+//  *        requestBody:
+//  *          $ref: "#/components/requestBodies/User"
+//  *        responses:
+//  *          200: 
+//  *            description: A successful response, user created
+//  *          400:
+//  *            description: bad request
+//  * components:
+//  *    requestBodies:
+//  *      User:
+//  *        description: User object
+//  *        required: true
+//  *        content:
+//  *          application/json:
+//  *            schema:
+//  *              type: object
+//  *              properties:
+//  *                id:
+//  *                  type: integer
+//  *                  example: 1
+//  *                  description: User id
+//  *                name: 
+//  *                  type: string
+//  *                  example: Ivan
+//  *                  description: User name
+//  *                age:
+//  *                  type: integer
+//  *                  example: 30
+//  *                  description: User age
+//  *                gender: 
+//  *                  type: string
+//  *                  example: man
+//  *                  description: User gender
+//  */
 router.post('/', validationBodyId, validationBodyName, validationBodyGender, validationBodyAge, async (req, res) => {
     const result = validationResult(req);
     if (!result.isEmpty()) {
@@ -37,7 +80,27 @@ router.post('/', validationBodyId, validationBodyName, validationBodyGender, val
         res.send('error: ' + error.message);
     }
 })
-router.delete('/:id', validationParamId, async (req, res) => { // создать проверку param.id
+/**
+ * @swagger
+ *  /api/user/{id}:
+ *    delete:
+ *      tags:
+ *        - User
+ *      summary: Delete user
+ *      description: Delete user by id
+ *      parameters:
+ *        - name: id
+ *          in: path
+ *          description: ID user that needs to be delete
+ *          required: true
+ *      responses:
+ *        "200": 
+ *          description: A successful response, TRUE if deleted, False if user not found
+ *        "400":
+ *          description: bad request
+ * 
+ */
+router.delete('/:id', validationParamId, async (req, res) => {
     const result = validationResult(req);
     if (!result.isEmpty()) {
         return res.status(400).send({ errors: result.array() })
@@ -50,6 +113,28 @@ router.delete('/:id', validationParamId, async (req, res) => { // создать
         res.send('error: ' + error.message);
     }
 })
+/**
+ * @swagger
+ *  /api/user/{id}:
+ *    put:
+ *      tags:
+ *          - User
+ *      summary: 
+ *          Update user
+ *      description: 
+ *          Update user
+ *      parameters:
+ *        - name: id
+ *          in: path
+ *          description: ID user that needs to be update
+ *          required: true
+ *      responses:
+ *        "200": 
+ *          description: A successful response, user update
+ *        "400":
+ *          description: bad request
+ * 
+ */
 router.put('/:id', validationParamId, validationBodyName, validationBodyGender, validationBodyAge, async (req, res) => {
     const result = validationResult(req);
     if (!result.isEmpty()) {

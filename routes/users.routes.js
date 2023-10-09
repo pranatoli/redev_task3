@@ -7,6 +7,21 @@ Sentry.init({
 });
 const { query, param, matchedData, validationResult } = require('express-validator');
 
+/**
+ *@swagger
+ *  /api/users:
+ *    get:
+ *      tags:
+ *         - Users
+ *      summary: Get list users
+ *      description: Get all users
+ *      responses:
+ *          "200": 
+ *            description: Get list users
+ *          "400":
+ *            description: bad request
+ * 
+ */
 router.get('/', async (req, res) => {
     try {
         const users = await UsersController.getUsers();
@@ -16,7 +31,30 @@ router.get('/', async (req, res) => {
         res.send('error: ' + error.message);
     }
 })
-
+/**
+ *@swagger
+ *  /api/users/filtredUsers:
+ *    get:
+ *      tags:
+ *         - Users
+ *      summary: Get user by age
+ *      description: Get users with age filter (min = 0, max = 110)
+ *      parameters:
+ *        - name: min
+ *          in: query
+ *          required: true 
+ *        - name: max
+ *          in: query
+ *          required: true
+ *      requestBody:
+ *          sdsd
+ *      responses:
+ *          "200": 
+ *            description: Get list users by age
+ *          "400":
+ *            description: Bad request
+ * 
+ */
 router.get('/filtredUsers', [
     query('min').notEmpty().isInt(),
     query('max').notEmpty().isInt()
@@ -37,7 +75,25 @@ router.get('/filtredUsers', [
             res.send('error: ' + error.message);
         }
     })
-
+/**
+ *@swagger
+ *  /api/users/{gender}:
+ *    get:
+ *      tags:
+ *         - Users
+ *      summary: Get users by gender (man or women)
+ *      description: Get users by gender
+ *      parameters:
+ *        - name: gender
+ *          in: path
+ *          required: true
+ *      responses:
+ *          "200": 
+ *            description: A successful response, get filtred list users
+ *          "400":
+ *            description: bad request
+ * 
+ */
 router.get('/:gender',
     param('gender').notEmpty().escape(),
     async (req, res) => {
