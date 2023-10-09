@@ -43,8 +43,8 @@ class UsersServices {
             fs.readFile('data.json', 'utf8', (error, data) => {
                 if (error) throw error;
                 const arrUsers = JSON.parse(data);
-                // let lastId = arrUsers.at(-1).id + 1;// create unical id
-                // req.body.id = lastId; // create unical id
+                let lastId = arrUsers[arrUsers.length - 1].id + 1;// create unical id
+                req.body.id = lastId; // create unical id
                 arrUsers.push(req.body);
                 fs.writeFile('data.json', JSON.stringify(arrUsers), (error) => {
                     if (error) throw error;
