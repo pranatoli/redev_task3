@@ -1,5 +1,6 @@
 const UserServices = require('../services/users.services');
 
+
 class UsersController {
     async getUsers() {
         const users = await UserServices.getUsers();

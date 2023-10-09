@@ -17,7 +17,7 @@ class UsersServices {
             fs.readFile('data.json', 'utf8', (error, data) => {
                 if (error) throw error;
                 const arrUsers = JSON.parse(data);
-                const filterUsers = arrUsers.filter(i => i.gender == req.params.gender)
+                const filterUsers = arrUsers.filter(i => i.gender == req.gender)
                 res(filterUsers)
             })
         })
@@ -28,10 +28,12 @@ class UsersServices {
             fs.readFile('data.json', 'utf8', (error, data) => {
                 if (error) throw error;
                 const arrUsers = JSON.parse(data);
-                const { min, max } = req.query;
-                console.log(min);
+                const { min, max } = req;
+                if (!(min >= 0 && max <= 110)) {
+                    return res({ status: 400, send: 'enter correct age: number from 0 to 110 years' })
+                }
                 const filtredUsers = arrUsers.filter(i => i.age >= min && i.age <= max);
-                res(filtredUsers);
+                res({ status: 200, send: filtredUsers });
             })
         })
     }
