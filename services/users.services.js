@@ -50,7 +50,9 @@ class UsersServices {
                     if (error) throw error;
                     fs.readFile('data.json', 'utf8', (error, data) => {
                         if (error) throw error;
-                        const lastUser = JSON.parse(data).at(-1)
+                        const users = JSON.parse(data);
+                        const lastUser = users[[users.length - 1]]
+                        console.log(lastUser);
                         res(lastUser)
                     })
                 });
