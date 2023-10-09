@@ -23,50 +23,50 @@ const validationParamId = [
     param('id').notEmpty().isInt(),
 ]
 
-// /**
-//  * @swagger
-//  *  /api/user:
-//  *      post:
-//  *        tags: 
-//  *            - User
-//  *        summary:
-//  *           Create user
-//  *        description:
-//  *            Add new user 
-//  *        requestBody:
-//  *          $ref: "#/components/requestBodies/User"
-//  *        responses:
-//  *          200: 
-//  *            description: A successful response, user created
-//  *          400:
-//  *            description: bad request
-//  * components:
-//  *    requestBodies:
-//  *      User:
-//  *        description: User object
-//  *        required: true
-//  *        content:
-//  *          application/json:
-//  *            schema:
-//  *              type: object
-//  *              properties:
-//  *                id:
-//  *                  type: integer
-//  *                  example: 1
-//  *                  description: User id
-//  *                name: 
-//  *                  type: string
-//  *                  example: Ivan
-//  *                  description: User name
-//  *                age:
-//  *                  type: integer
-//  *                  example: 30
-//  *                  description: User age
-//  *                gender: 
-//  *                  type: string
-//  *                  example: man
-//  *                  description: User gender
-//  */
+/**
+ * @swagger
+ *  /api/user:
+ *      post:
+ *        tags: 
+ *            - User
+ *        summary:
+ *           Create user
+ *        description:
+ *            Add new user 
+ *        requestBody:
+ *          $ref: "#/components/requestBodies/User"
+ *        responses:
+ *          200: 
+ *            description: A successful response, user created
+ *          400:
+ *            description: bad request
+ * components:
+ *    requestBodies:
+ *      User:
+ *        description: User object
+ *        required: true
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                id:
+ *                  type: integer
+ *                  example: 1
+ *                  description: User id
+ *                name: 
+ *                  type: string
+ *                  example: Ivan
+ *                  description: User name
+ *                age:
+ *                  type: integer
+ *                  example: 30
+ *                  description: User age
+ *                gender: 
+ *                  type: string
+ *                  example: man
+ *                  description: User gender
+ */
 router.post('/', validationBodyId, validationBodyName, validationBodyGender, validationBodyAge, async (req, res) => {
     const result = validationResult(req);
     if (!result.isEmpty()) {
@@ -94,9 +94,9 @@ router.post('/', validationBodyId, validationBodyName, validationBodyGender, val
  *          description: ID user that needs to be delete
  *          required: true
  *      responses:
- *        "200": 
+ *        200: 
  *          description: A successful response, TRUE if deleted, False if user not found
- *        "400":
+ *        400:
  *          description: bad request
  * 
  */
@@ -129,9 +129,9 @@ router.delete('/:id', validationParamId, async (req, res) => {
  *          description: ID user that needs to be update
  *          required: true
  *      responses:
- *        "200": 
+ *        200: 
  *          description: A successful response, user update
- *        "400":
+ *        400:
  *          description: bad request
  * 
  */

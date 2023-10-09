@@ -13,14 +13,16 @@ Sentry.init({
 });
 
 const swaggerOptioins = {
-    swaggerDefinition: {
+    definition: {
+        openapi: "3.0.0",
         info: {
             title: "Customer API",
             description: "Customer Api Information",
             contact: {
                 name: "Anatoli"
             },
-            servers: [`http://localhost:${port}/`]
+            servers: [`http://localhost:${port}/`],
+            version: "1.0.0"
         }
     },
     apis: ["./routes/*.js"],

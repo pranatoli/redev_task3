@@ -16,9 +16,9 @@ const { query, param, matchedData, validationResult } = require('express-validat
  *      summary: Get list users
  *      description: Get all users
  *      responses:
- *          "200": 
+ *          200: 
  *            description: Get list users
- *          "400":
+ *          400:
  *            description: bad request
  * 
  */
@@ -46,12 +46,10 @@ router.get('/', async (req, res) => {
  *        - name: max
  *          in: query
  *          required: true
- *      requestBody:
- *          sdsd
  *      responses:
- *          "200": 
+ *          200: 
  *            description: Get list users by age
- *          "400":
+ *          400:
  *            description: Bad request
  * 
  */
@@ -77,7 +75,7 @@ router.get('/filtredUsers', [
     })
 /**
  *@swagger
- *  /api/users/{gender}:
+ * /api/users/{gender}:
  *    get:
  *      tags:
  *         - Users
@@ -88,9 +86,9 @@ router.get('/filtredUsers', [
  *          in: path
  *          required: true
  *      responses:
- *          "200": 
+ *          200: 
  *            description: A successful response, get filtred list users
- *          "400":
+ *          400:
  *            description: bad request
  * 
  */
