@@ -43,8 +43,9 @@ class UsersServices {
             fs.readFile('data.json', 'utf8', (error, data) => {
                 if (error) throw error;
                 const arrUsers = JSON.parse(data);
-                let lastId = arrUsers[arrUsers.length - 1].id + 1;// create unical id
-                req.body.id = lastId; // create unical id
+                // чтобы ID не повторялись увеличиваем на единицу последний из списка
+                let lastId = arrUsers[arrUsers.length - 1].id + 1;
+                req.body.id = lastId; // изменяем переданный ID в body на сгенерированный нами
                 arrUsers.push(req.body);
                 fs.writeFile('data.json', JSON.stringify(arrUsers), (error) => {
                     if (error) throw error;
@@ -99,9 +100,19 @@ class UsersServices {
                 if (error) throw error;
                 const arrUsers = JSON.parse(data);
                 const id = arrUsers.findIndex((i) => i.id == req.params.id);
-                console.log(id);
                 if (id == -1) return res({ status: 404, send: "user not found" });
-                const updateUsers = arrUsers.map((i) => i.id == req.params.id ? { ...i, name: req.body.name } : i);
+                // обновляем поля пользователя, в зависимости от того что передали 
+                let updateUsers = arrUsers.map((i) => {
+                    if (i.id == req.params.id) {
+                        if (i.name != req.body.name) {
+                            return { ...i, name: req.body.name }
+                        } else if (i.age != req.body.age) {
+                            return { ...i, age: req.body.age }
+                        } else if (i.gender != req.body.gender) {
+                            return { ...i, gender: req.body.gender }
+                        }
+                    } else return i
+                });
                 arrUsers.splice(0, arrUsers.length, ...updateUsers)
                 fs.writeFile('data.json', JSON.stringify(arrUsers), (error) => {
                     if (error) throw error;
