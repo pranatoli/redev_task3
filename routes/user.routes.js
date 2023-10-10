@@ -113,27 +113,31 @@ router.delete('/:id', validationParamId, async (req, res) => {
         res.send('error: ' + error.message);
     }
 })
+
 /**
  * @swagger
  *  /api/user/{id}:
- *    put:
- *      tags:
- *          - User
- *      summary: 
- *          Update user
- *      description: 
- *          Update user
- *      parameters:
- *        - name: id
- *          in: path
- *          description: ID user that needs to be update
- *          required: true
- *      responses:
- *        200: 
- *          description: A successful response, user update
- *        400:
- *          description: bad request
- * 
+ *      put:
+ *        tags: 
+ *            - User
+ *        summary:
+ *           Update user
+ *        description:
+ *           Update user
+ *        parameters:
+ *          - name: id
+ *            in: path
+ *            description: ID user that needs to be update
+ *            required: true
+ *        requestBody:
+ *          $ref: "#/components/requestBodies/User"
+ *        responses:
+ *          200: 
+ *            description: A successful response, user update
+ *          201:
+ *            descriptioin: User create
+ *          400:
+ *            description: bad request
  */
 router.put('/:id', validationParamId, validationBodyName, validationBodyGender, validationBodyAge, async (req, res) => {
     const result = validationResult(req);
@@ -149,7 +153,31 @@ router.put('/:id', validationParamId, validationBodyName, validationBodyGender, 
         res.send('error: ' + error.message);
     }
 })
-
+/**
+ * @swagger
+ *  /api/user/{id}:
+ *      patch:
+ *        tags: 
+ *            - User
+ *        summary:
+ *           Update user name
+ *        description:
+ *           Update user
+ *        parameters:
+ *          - name: id
+ *            in: path
+ *            description: ID user that needs to be update
+ *            required: true
+ *        requestBody:
+ *          $ref: "#/components/requestBodies/User"
+ *        responses:
+ *          200: 
+ *            description: A successful response, user update
+ *          201:
+ *            descriptioin: User create
+ *          400:
+ *            description: bad request
+ */
 router.patch('/:id', validationParamId, validationBodyName, async (req, res) => {
     const result = validationResult(req);
     if (!result.isEmpty()) {
